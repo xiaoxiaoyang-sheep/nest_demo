@@ -12,6 +12,9 @@ import {
   UseFilters,
   Headers,
   UnauthorizedException,
+  UseGuards,
+  Req,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ConfigService } from '@nestjs/config';
@@ -21,6 +24,8 @@ import { GetUserDto } from './dto/get-user.dto';
 import { TypeormFilter } from 'src/filters/typeorm.filter';
 import { CreateUserDto } from './dto/create-user.dto';
 import { CreateUserPipe } from './pipes/create-user.pipe';
+import { AuthGuard } from '@nestjs/passport';
+import { AdminGuard } from '../guards/admin.guard';
 
 @Controller('user')
 @UseFilters(new TypeormFilter())
@@ -37,6 +42,12 @@ export class UserController {
   }
 
   @Get()
+  // 非常重要的知识点
+  // 1、 装饰器的执行顺序，方法的装饰器如果有多个，则是从下往上执行
+  // @UseGuards(AdminGuard)
+  // @UseGuards(AuthGuard('jwt'))
+  //  2、 如果使用UserGuard传递多个守卫，则从前往后执行，如果前面的Guard没有通过，则后面的Guard不会执行
+  @UseGuards(AuthGuard('jwt'), AdminGuard)
   getUsers(@Query() query: GetUserDto): any {
     // this.logger.log(`请求getUsers成功`);
     // this.logger.warn(`请求getUsers成功`);
@@ -80,7 +91,13 @@ export class UserController {
   }
 
   @Get('/profile')
-  getUserProfile(@Query('id') id: any): any {
+  @UseGuards(AuthGuard('jwt'))
+  getUserProfile(
+    @Query('id', ParseIntPipe) id: any
+    // 这里req中的user是通过AuthGuard('jwt')中的validate方法返回的
+    // PassportMoudle来添加的
+    // @Req() req
+  ): any {
     console.log(typeof id);
     
     return this.userService.findProfile(id);
