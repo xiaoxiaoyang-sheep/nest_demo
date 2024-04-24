@@ -38,18 +38,20 @@ export class AllExceptionFilter implements ExceptionFilter {
     //   }
     // }
 
-    const responseBody = {
-      headers: request.headers,
-      query: request.query,
-      body: request.body,
-      params: request.params,
-      timestamp: new Date().toISOString(),
-      // 还可以加入一些用户信息
-      // IP信息
-      ip: requestIp.getClientIp(request),
-      exceptioin: exception['name'],
-      error: msg,
-    };
+    const responseBody = msg
+    
+    // {
+    //   headers: request.headers,
+    //   query: request.query,
+    //   body: request.body,
+    //   params: request.params,
+    //   timestamp: new Date().toISOString(),
+    //   // 还可以加入一些用户信息
+    //   // IP信息
+    //   ip: requestIp.getClientIp(request),
+    //   exceptioin: exception['name'],
+    //   error: msg,
+    // };
 
     this.logger.error('[toimc]', responseBody);
     httpAdapter.reply(response, responseBody, httpStatus);

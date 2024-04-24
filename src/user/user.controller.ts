@@ -19,6 +19,8 @@ import { User } from './user.entity';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { GetUserDto } from './dto/get-user.dto';
 import { TypeormFilter } from 'src/filters/typeorm.filter';
+import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserPipe } from './pipes/create-user.pipe';
 
 @Controller('user')
 @UseFilters(new TypeormFilter())
@@ -44,9 +46,11 @@ export class UserController {
   }
 
   @Post()
-  addUser(@Body() dto: any): any {
+  addUser(@Body(CreateUserPipe) dto: CreateUserDto): any {
     // todo 解析Body参数
     const user = dto as User;
+    console.log(user);
+    
     // return this.userService.addUser();
     return this.userService.create(user);
   }
@@ -76,8 +80,10 @@ export class UserController {
   }
 
   @Get('/profile')
-  getUserProfile(): any {
-    return this.userService.findProfile(2);
+  getUserProfile(@Query('id') id: any): any {
+    console.log(typeof id);
+    
+    return this.userService.findProfile(id);
   }
 
   @Get('/logs')
