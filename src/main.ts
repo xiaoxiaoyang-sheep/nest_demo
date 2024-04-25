@@ -30,6 +30,9 @@ async function bootstrap() {
     // whitelist: true
   }))
 
+  // 全局守卫
+  // app.useGlobalGuards()
+
   const port = 3000;
   await app.listen(port);
 }

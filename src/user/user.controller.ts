@@ -26,8 +26,10 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { CreateUserPipe } from './pipes/create-user.pipe';
 import { AuthGuard } from '@nestjs/passport';
 import { AdminGuard } from '../guards/admin.guard';
+import { JwtGuard } from 'src/guards/jwt.guard';
 
 @Controller('user')
+@UseGuards(JwtGuard)
 @UseFilters(new TypeormFilter())
 export class UserController {
   // private logger = new Logger(UserController.name);
@@ -47,7 +49,8 @@ export class UserController {
   // @UseGuards(AdminGuard)
   // @UseGuards(AuthGuard('jwt'))
   //  2、 如果使用UserGuard传递多个守卫，则从前往后执行，如果前面的Guard没有通过，则后面的Guard不会执行
-  @UseGuards(AuthGuard('jwt'), AdminGuard)
+  // @UseGuards(AuthGuard('jwt'), AdminGuard)
+  @UseGuards(AdminGuard)
   getUsers(@Query() query: GetUserDto): any {
     // this.logger.log(`请求getUsers成功`);
     // this.logger.warn(`请求getUsers成功`);

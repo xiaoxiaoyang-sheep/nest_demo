@@ -45,7 +45,14 @@ const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
     AuthModule,
   ],
   controllers: [],
-  providers: [Logger],
+  providers: [
+    Logger,
+    // 在这里使用全局守卫 能够使用DI
+    // {
+    // provide: APP_GUARD,
+    // useClass: JwtGuard
+    // }
+  ],
   exports: [Logger],
 })
 export class AppModule {}
