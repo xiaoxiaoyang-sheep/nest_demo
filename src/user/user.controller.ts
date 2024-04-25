@@ -63,7 +63,6 @@ export class UserController {
   addUser(@Body(CreateUserPipe) dto: CreateUserDto): any {
     // todo 解析Body参数
     const user = dto as User;
-    console.log(user);
     
     // return this.userService.addUser();
     return this.userService.create(user);

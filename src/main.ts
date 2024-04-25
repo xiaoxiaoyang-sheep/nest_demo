@@ -24,14 +24,18 @@ async function bootstrap() {
   const logger = new Logger();
   app.useGlobalFilters(new AllExceptionFilter(logger, httpAdapter));
 
-  // 全局拦截器
+  // 全局管道
   app.useGlobalPipes(new ValidationPipe({
     // 去除在类上不存在的字段
-    // whitelist: true
+    whitelist: true
   }))
 
   // 全局守卫
   // app.useGlobalGuards()
+  // 弊端 -> 无法使用DI -> 无法访问userService
+
+  // 全局拦截器
+  // app.useGlobalInterceptors()
 
   const port = 3000;
   await app.listen(port);
