@@ -58,7 +58,7 @@ export class UserService {
   }
 
   find(username: string) {
-    return this.userRepository.findOne({ where: { username }, relations: ['roles'] });
+    return this.userRepository.findOne({ where: { username }, relations: ['roles', 'roles.menus'] });
   }
 
   findOne(id: number) {
@@ -66,6 +66,8 @@ export class UserService {
   }
 
   async create(user: Partial<User>) {
+    console.log(user);
+    
     if (!user.roles) {
       const role = await this.rolesRepository.findOne({
         where: {

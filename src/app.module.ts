@@ -1,15 +1,19 @@
 import { Global, Logger, Module } from '@nestjs/common';
-import { UserModule } from './user/user.module';
-import { ConfigModule } from '@nestjs/config';
+
 import * as dotenv from 'dotenv';
 import * as Joi from 'joi';
-import { TypeOrmModule } from '@nestjs/typeorm';
 
+
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
 import { LogsModule } from './logs/logs.module';
+import { AuthModule } from './auth/auth.module';
 import { RolesModule } from './roles/roles.module';
+import { MenusModule } from './menus/menus.module';
 
 import { connectionParams } from '../ormconfig';
-import { AuthModule } from './auth/auth.module';
+
 
 const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
 
@@ -43,6 +47,7 @@ const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
     LogsModule,
     RolesModule,
     AuthModule,
+    MenusModule,
   ],
   controllers: [],
   providers: [
