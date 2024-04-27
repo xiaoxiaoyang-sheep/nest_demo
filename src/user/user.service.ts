@@ -4,8 +4,8 @@ import { In, Repository } from 'typeorm';
 import { User } from './user.entity';
 import { Logs } from '../logs/logs.entity';
 import { GetUserDto } from './dto/get-user.dto';
-import { conditionUtil } from 'src/utils/db.helper';
-import { Roles } from 'src/roles/roles.entity';
+import { conditionUtil } from '../utils/db.helper';
+import { Roles } from '../roles/roles.entity';
 import * as argon2 from 'argon2'
 
 @Injectable()

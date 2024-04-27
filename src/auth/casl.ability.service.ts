@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { AbilityBuilder, ExtractSubjectType, createMongoAbility } from "@casl/ability"
-import { Logs } from "src/logs/logs.entity";
-import { UserService } from "src/user/user.service";
-import { getEntities } from "src/utils/common";
+import { Logs } from "../logs/logs.entity";
+import { UserService } from "../user/user.service";
+import { getEntities } from "../utils/common";
 
 @Injectable()
 export class CaslAbilityService {
@@ -30,6 +30,8 @@ export class CaslAbilityService {
                 }
             })
         })
+        
+        can('update', Logs, 'path', )
         
         const ability = build({
             detectSubjectType: (object) => object.constructor as ExtractSubjectType<any>

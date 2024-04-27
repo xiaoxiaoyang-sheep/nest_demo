@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsOptional, IsString, Length } from "class-validator";
-import { Roles } from "src/roles/roles.entity";
+import { Roles } from "../../roles/roles.entity";
 
 
 export class CreateUserDto {

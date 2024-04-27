@@ -8,9 +8,9 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { TypeormFilter } from 'src/filters/typeorm.filter';
+import { TypeormFilter } from '../filters/typeorm.filter';
 import { SigninUserDto } from './dto/signin-user.dto';
-import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
+import { SerializeInterceptor } from '../interceptors/serialize.interceptor';
 
 @Controller('auth')
 @UseInterceptors(ClassSerializerInterceptor)

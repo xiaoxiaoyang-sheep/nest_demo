@@ -4,8 +4,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { GetUserDto } from 'src/user/dto/get-user.dto';
-import { UserService } from 'src/user/user.service';
+import { GetUserDto } from '../user/dto/get-user.dto';
+import { UserService } from '../user/user.service';
 import * as argon2 from 'argon2';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class AuthService {
     const user = await this.userService.find(username);
 
     if (!user) {
-      throw new ForbiddenException('用户存在，请注册');
+      throw new ForbiddenException('用户未存在，请注册');
     }
 
     // 用户密码进行比对

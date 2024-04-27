@@ -2,10 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { RolesService } from './roles.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from 'src/enum/roles.enum';
-import { RoleGuard } from 'src/guards/role.guard';
-import { JwtGuard } from 'src/guards/jwt.guard';
+import { Roles } from '../decorators/roles.decorator';
+import { Role } from '../enum/roles.enum';
+import { RoleGuard } from '../guards/role.guard';
+import { JwtGuard } from '../guards/jwt.guard';
 
 @Controller('roles')
 @Roles(Role.Admin)

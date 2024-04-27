@@ -21,12 +21,12 @@ import { ConfigService } from '@nestjs/config';
 import { User } from './user.entity';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { GetUserDto } from './dto/get-user.dto';
-import { TypeormFilter } from 'src/filters/typeorm.filter';
+import { TypeormFilter } from '../filters/typeorm.filter';
 import { CreateUserDto } from './dto/create-user.dto';
 import { CreateUserPipe } from './pipes/create-user.pipe';
 import { AuthGuard } from '@nestjs/passport';
 import { AdminGuard } from '../guards/admin.guard';
-import { JwtGuard } from 'src/guards/jwt.guard';
+import { JwtGuard } from '../guards/jwt.guard';
 
 @Controller('user')
 @UseGuards(JwtGuard)

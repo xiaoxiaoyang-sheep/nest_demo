@@ -1,12 +1,12 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
-import { CaslAbilityService } from 'src/auth/casl.ability.service';
+import { CaslAbilityService } from '../auth/casl.ability.service';
 import {
   CHECK_POLICIES_KEY,
   CaslHandlerType,
   PolicyHandlerCallback,
-} from 'src/decorators/casl.decorator';
+} from '../decorators/casl.decorator';
 
 @Injectable()
 export class CaslGuard implements CanActivate {

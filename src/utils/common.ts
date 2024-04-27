@@ -1,6 +1,6 @@
-import { Role } from "src/enum/roles.enum"
-import { Logs } from "src/logs/logs.entity"
-import { User } from "src/user/user.entity"
+import { Role } from "../enum/roles.enum"
+import { Logs } from "../logs/logs.entity"
+import { User } from "../user/user.entity"
 
 export const getEntities = (path: string) => {
     const map = {
