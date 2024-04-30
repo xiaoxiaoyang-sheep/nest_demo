@@ -1,24 +1,16 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import * as Spec from 'pactum/src/models/Spec';
+import { pactumType } from './setup-jest';
 
 describe('AppController (e2e)', () => {
-  let app: INestApplication;
+  // let app: INestApplication;
+  let pactum: pactumType
 
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-
-    app = moduleFixture.createNestApplication();
-    await app.init();
+  beforeEach(() => {
+    // pactum.request.setBaseUrl('http://localhost:3000');
+    pactum = global.pactum 
   });
 
   it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+    return pactum.spec().get('/api/v1/auth').expectStatus(200);
   });
 });

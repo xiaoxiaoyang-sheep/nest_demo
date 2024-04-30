@@ -5,12 +5,12 @@ import * as Joi from 'joi';
 
 
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user/user.module';
+import { UserModule } from './modules/user/user.module';
 import { ConfigModule } from '@nestjs/config';
-import { LogsModule } from './logs/logs.module';
-import { AuthModule } from './auth/auth.module';
-import { RolesModule } from './roles/roles.module';
-import { MenusModule } from './menus/menus.module';
+import { LogsModule } from './modules/logs/logs.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { RolesModule } from './modules/roles/roles.module';
+import { MenusModule } from './modules/menus/menus.module';
 
 import { connectionParams } from '../ormconfig';
 
@@ -26,7 +26,7 @@ const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
       load: [() => dotenv.config({ path: '.env' })],
       validationSchema: Joi.object({
         NODE_ENV: Joi.string()
-          .valid('development', 'production')
+          .valid('development', 'production', 'test')
           .default('development'),
         DB_PORT: Joi.number().default(3306),
         DB_HOST: Joi.alternatives().try(
